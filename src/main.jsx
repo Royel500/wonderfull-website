@@ -13,6 +13,9 @@ import SignIn from './Components/SignIn.jsx';
 import SignUp from './Components/SignUp';
 import Error from './Components/Error.jsx';
 import AuthProvider from './Components/Context/AuthProvider.jsx';
+import AddPlant from './Components/AddPlant.jsx';
+import Update from './Components/Update.jsx';
+import Details from './Components/Details.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +24,20 @@ const router = createBrowserRouter([
     children:[
       {
         index:true ,
+        loader: () => fetch('http://localhost:4000/plants'),
         element:<Home></Home>
+      },
+      {
+    path:'/plants',
+    element:<AddPlant></AddPlant>
+      },
+      {
+  path:'/update',
+  element:<Update></Update>
+      },
+      {
+        path:'/details' ,
+        element:<Details></Details>
       },
       {
 
