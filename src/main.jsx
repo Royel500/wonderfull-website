@@ -16,6 +16,7 @@ import AuthProvider from './Components/Context/AuthProvider.jsx';
 import AddPlant from './Components/AddPlant.jsx';
 import Update from './Components/Update.jsx';
 import Details from './Components/Details.jsx';
+import BannerSlider from './Components/BannerSlider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
 
         path:'/signIn' ,
         element: <SignIn></SignIn>
+      },
+      {
+     path:'/slider',
+     element:<BannerSlider></BannerSlider>
       },
       {
         path:'/signUp' ,

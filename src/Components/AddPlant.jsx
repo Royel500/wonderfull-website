@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from './Context/AuthProvider';
 
 const AddPlant = () => {
-
-  // Sample user data (would come from auth context in real app)
-  const user = {
-    name: "John Doe",
-    email: "john@example.com"
-  };
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const tipData = Object.fromEntries(formData.entries());
-    
+
     // Add user info automatically
-    tipData.userName = user.name;
+    tipData.userName = user.displayName;
     tipData.userEmail = user.email;
 
     fetch('http://localhost:4000/plants', {
@@ -26,35 +22,35 @@ const AddPlant = () => {
       },
       body: JSON.stringify(tipData),
     })
-    .then(res => {
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      return res.json();
-    })
-    .then(data => {
-      console.log('Server Response:', data);
-      if (data.insertedId || data._id || data.id) {
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log('Server Response:', data);
+        if (data.insertedId || data._id || data.id) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Plant tip added successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          form.reset();
+        } else {
+          Swal.fire({
+            title: 'Warning!',
+            text: 'Tip was added, but no ID was returned.',
+            icon: 'warning',
+          });
+        }
+      })
+      .catch(error => {
         Swal.fire({
-          title: 'Success!',
-          text: 'Coffee added successfully.',
-          icon: 'success',
-          confirmButtonText: 'OK',
+          title: 'Error!',
+          text: error.message,
+          icon: 'error',
         });
-        form.reset();
-      } else {
-        Swal.fire({
-          title: 'Warning!',
-          text: 'Coffee was added, but no ID was returned.',
-          icon: 'warning',
-        });
-      }
-    })
-    .catch(error => {
-      Swal.fire({
-        title: 'Error!',
-        text: error.message,
-        icon: 'error',
       });
-    });
   };
 
   return (
@@ -77,7 +73,7 @@ const AddPlant = () => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="title"
                 className="input input-bordered w-full"
                 placeholder="e.g., How I Grow Tomatoes Indoors"
                 required
@@ -171,7 +167,7 @@ const AddPlant = () => {
               </label>
               <input
                 type="text"
-                value={user.name}
+                value={user?.displayName || ''}
                 className="input input-bordered w-full bg-gray-100"
                 readOnly
               />
@@ -183,7 +179,7 @@ const AddPlant = () => {
               </label>
               <input
                 type="email"
-                value={user.email}
+                value={user?.email || ''}
                 className="input input-bordered w-full bg-gray-100"
                 readOnly
               />

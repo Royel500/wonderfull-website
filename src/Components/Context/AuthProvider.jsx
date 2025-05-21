@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { auth } from './../../FairBase/FairBase';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 
 
@@ -24,9 +24,18 @@ const createUser = ( email,password) =>{
   };
 
 
+  // ----LogOut---------
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth)
+      .finally(() => setLoading(false)); 
+  };
+
+
     const userInfo = {
    createUser,
    signIn,
+   logOut,
    loading,
    user,
     }
