@@ -15,7 +15,7 @@ import SignUp from './Components/SignUp';
 import Error from './Components/Error.jsx';
 import AuthProvider from './Components/Context/AuthProvider.jsx';
 import AddPlant from './Components/AddPlant.jsx';
-// import Update from './Components/Update.jsx';
+import Update from './Components/Update.jsx';
 import Details from './Components/Details.jsx';
 import BannerSlider from './Components/BannerSlider.jsx';
 // import Explore from './Components/Explore.jsx';
@@ -38,10 +38,11 @@ const router = createBrowserRouter([
     path:'/plants',
     element:<AddPlant></AddPlant>
       },
-// {
-//   path: '/update/:id',
-//   element: <Update />
-// },
+{
+  path: '/update/:id',
+   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+  element: <Update />
+},
 {
   path: '/details/:id',
   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),

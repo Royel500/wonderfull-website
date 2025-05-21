@@ -3,7 +3,6 @@ import { useLoaderData } from 'react-router';
 
 const Details = () => {
     const data = useLoaderData();
-    console.log(data);
 
     return (
         <div className=" lg:w-3xl mx-auto mt-10 p-5 space-y-5 bg-green-200 rounded shadow">

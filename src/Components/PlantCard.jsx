@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 
 const PlantCard = ({ card, plant, setPlant }) => {
+
   const { _id, name, category, plantType, image } = card;
 
   const handleDelete = (_id) => {
