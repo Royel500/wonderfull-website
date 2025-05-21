@@ -71,7 +71,7 @@ const SignUp = () => {
 
 
   return (
- <div className="flex lg:ml-100 items-center justify-center min-h-screen bg-base-200 px-10">
+ <div className="flex  items-center justify-center min-h-screen bg-base-200 px-10">
     <div className="card py-5 bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <h1 className=" ">Register Your Account</h1>
         <form onSubmit={handleRegister} className="card-body">

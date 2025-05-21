@@ -73,7 +73,7 @@ const AddPlant = () => {
               </label>
               <input
                 type="text"
-                name="title"
+                name="name"
                 className="input input-bordered w-full"
                 placeholder="e.g., How I Grow Tomatoes Indoors"
                 required

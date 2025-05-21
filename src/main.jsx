@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import "./App.css"
+
 import App from './App.jsx'
 
 import {
@@ -14,9 +15,14 @@ import SignUp from './Components/SignUp';
 import Error from './Components/Error.jsx';
 import AuthProvider from './Components/Context/AuthProvider.jsx';
 import AddPlant from './Components/AddPlant.jsx';
-import Update from './Components/Update.jsx';
+// import Update from './Components/Update.jsx';
 import Details from './Components/Details.jsx';
 import BannerSlider from './Components/BannerSlider.jsx';
+// import Explore from './Components/Explore.jsx';
+import Gardeners from './Components/Gardeners.jsx';
+import BrowserTips from './Components/BrowserTips.jsx';
+
+// import Gardeners from './Components/Gardeners.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,34 +31,46 @@ const router = createBrowserRouter([
     children:[
       {
         index:true ,
-        loader: () => fetch('http://localhost:4000/plants'),
+  
         element:<Home></Home>
       },
       {
     path:'/plants',
     element:<AddPlant></AddPlant>
       },
-      {
-  path:'/update',
-  element:<Update></Update>
-      },
-      {
-        path:'/details' ,
-        element:<Details></Details>
-      },
+// {
+//   path: '/update/:id',
+//   element: <Update />
+// },
+{
+  path: '/details/:id',
+  loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+  element: <Details />
+},
       {
 
         path:'/signIn' ,
         element: <SignIn></SignIn>
       },
+         {
+        path:'/signUp' ,
+        element: <SignUp></SignUp>
+      },
       {
      path:'/slider',
      element:<BannerSlider></BannerSlider>
       },
-      {
-        path:'/signUp' ,
-        element: <SignUp></SignUp>
-      }
+    {
+      path:'/tips' ,
+            loader: () => fetch('http://localhost:4000/plants'),
+      element:<BrowserTips></BrowserTips>
+
+    },
+  {
+    path:'/explore' ,
+    element:<Gardeners></Gardeners>
+  }
+   
     ]
 
   },
