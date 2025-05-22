@@ -40,7 +40,7 @@ if(data.modifiedCount){
     return (
        <div className="mx-10 my-15">
       <div>
-        <h1 className="text-4xl font-bold text-center">Update Tips</h1>
+        <h1 className="text-4xl font italic my-5 text-blue-800 font-bold text-center">Update Tips</h1>
        
       </div>
 
@@ -51,7 +51,7 @@ if(data.modifiedCount){
             {/* Title */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Title*</span>
+                <span className="label-text"> <strong> Title :</strong></span>
               </label>
               <input
                 type="text"
@@ -66,7 +66,7 @@ if(data.modifiedCount){
             {/* Plant Type */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Plant Type/Topic*</span>
+                <span className="label-text"> <strong> Plant Type/Topic : </strong></span>
               </label>
               <input
                 type="text"
@@ -81,14 +81,14 @@ if(data.modifiedCount){
             {/* Difficulty Level */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Difficulty Level*</span>
+                <span className="label-text"> <strong> Difficulty Level* </strong></span>
               </label>
               <select
                 name="difficulty"
                 className="select select-bordered w-full"
                 required
               >
-                <option value="">Select difficulty</option>
+                <option value=""> <strong> Select difficulty </strong></option>
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
@@ -98,7 +98,7 @@ if(data.modifiedCount){
             {/* Category */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Category*</span>
+                <span className="label-text"> <strong> Category* </strong></span>
               </label>
               <select
                 name="category"
@@ -106,7 +106,7 @@ if(data.modifiedCount){
                 className="select select-bordered w-full"
                 required
               >
-                <option value="">Select category</option>
+                <option value=""> <strong>Select category </strong> </option>
                 <option value="Composting">Composting</option>
                 <option value="Plant Care">Plant Care</option>
                 <option value="Vertical Gardening">Vertical Gardening</option>
@@ -120,7 +120,7 @@ if(data.modifiedCount){
             {/* Availability */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Visibility*</span>
+                <span className="label-text"><strong>Visibility* </strong> </span>
               </label>
               <select
                 name="availability"
@@ -136,7 +136,7 @@ if(data.modifiedCount){
             {/* Image URL */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Image URL</span>
+                <span className="label-text font-bold">Image URL</span>
               </label>
               <input
                 type="url"
@@ -149,7 +149,7 @@ if(data.modifiedCount){
             {/* User Info (read-only) */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Name</span>
+                <span className="label-text font-bold italic">Your Name</span>
               </label>
               <input
                 type="text"
@@ -161,7 +161,7 @@ if(data.modifiedCount){
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Email</span>
+                <span className="label-text font-bold italic">Your Email</span>
               </label>
               <input
                 type="email"
@@ -177,7 +177,7 @@ if(data.modifiedCount){
         <div className="form-control mt-6">
           <label className="label">
             
-            <span className="label-text">Description*</span>
+            <span className="label-text font-bold">Description*</span>
           </label>
           <textarea
             name="description"
@@ -190,7 +190,7 @@ if(data.modifiedCount){
 
         {/* Submit Button */}
         <div className="form-control mt-8">
-          <button type="submit" className="btn border-2 w-full">
+          <button type="submit" className="btn rounded-lg bg-emerald-500 border-2 w-full">
             Share Tip
           </button>
         </div>

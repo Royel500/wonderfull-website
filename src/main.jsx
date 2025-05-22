@@ -21,6 +21,7 @@ import BannerSlider from './Components/BannerSlider.jsx';
 // import Explore from './Components/Explore.jsx';
 import Gardeners from './Components/Gardeners.jsx';
 import BrowserTips from './Components/BrowserTips.jsx';
+import { TipsProvider } from './Components/Context/TipsContext.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
 
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
     children:[
       {
         index:true ,
-  
+        loader: () => fetch('http://localhost:4000/users'),
         element:<Home></Home>
       },
       {
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
     },
   {
     path:'/explore' ,
+          loader: () => fetch('http://localhost:4000/users'),
     element:<Gardeners></Gardeners>
   }
    
@@ -86,9 +88,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 <AuthProvider>
+  <TipsProvider>
      <RouterProvider router={router}>
-     
    </RouterProvider>
+   </TipsProvider>
 </AuthProvider>
   </StrictMode>,
 )

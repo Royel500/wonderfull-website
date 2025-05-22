@@ -47,7 +47,7 @@ const BannerSlider = () => {
             <div className="bg-black/50 p-6 rounded text-center">
               <h2 className="text-3xl md:text-5xl font-bold">{slide.title}</h2>
               <p className="mt-3">{slide.description}</p>
-              <button className="mt-4 px-4 py-2 text-black hover:bg-green-600 rounded">
+              <button className="mt-4 bg-fuchsia-600 font-bold px-4 py-2 text-white hover:bg-green-600 rounded">
                 Learn More
               </button>
             </div>

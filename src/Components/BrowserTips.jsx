@@ -8,7 +8,7 @@ const BrowserTips = () => {
     const data = useLoaderData();
   
     return (
-        <div>
+        <div className='space-y-3 my-10'>
             {data.map(card => (
                 <PlantCard key={card._id || 
                     card.id} card={card}
