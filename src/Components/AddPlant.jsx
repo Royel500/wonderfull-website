@@ -56,7 +56,7 @@ const AddPlant = () => {
   return (
     <div className="mx-10 my-15">
       <div>
-        <h1 className="text-4xl font-bold text-center">Share Garden Tip</h1>
+        <h1 className="text-4xl font-bold text-indigo-800 italic text-center">Share Garden Tip</h1>
         <p className="text-center my-5">
           Share your gardening knowledge with the community
         </p>
@@ -202,7 +202,7 @@ const AddPlant = () => {
 
         {/* Submit Button */}
         <div className="form-control mt-8">
-          <button type="submit" className="btn border-2 w-full">
+          <button type="submit" className="btn bg-gradient-to-r from-green-400 via-sky-400 to-pink-500 dark:bg-gray-900 border-2 w-full">
             Share Tip
           </button>
         </div>

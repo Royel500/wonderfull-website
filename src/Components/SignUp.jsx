@@ -1,165 +1,193 @@
-import React, { use, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from './Context/AuthProvider';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup ,updateProfile } from 'firebase/auth';
 import { auth } from '../FairBase/FairBase';
-import swal from 'sweetalert2'; // <-- fix import
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-      const provider = new GoogleAuthProvider
-        const navigate = useNavigate();
-    const {createUser} = use(AuthContext)
-  const [show, setShow] = useState(false);
+  const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const { createUser,user } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
-  const handleRegister = (e) => {
+  const showSuccessAlert = (email) => {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Registration Successful!',
+      html: `Welcome <b>${email}</b>!<br>Your account has been created.`,
+      showConfirmButton: false,
+      timer: 2500,
+      willClose: () => {
+        navigate('/');
+      }
+    });
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const formData = new FormData(form);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const password = formData.get('password');
-    const photo = formData.get('photo');
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
 
-    console.log({ name, email, password, photo });
-    
-    // Add your registration logic here
+    setError('');
 
-    createUser(email,password)
-    .then(res =>{
-        console.log(res.user)
-    })
-     .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorCode,errorMessage)
-    // ..
-  });
-
-    // Example validation:
+    // Password validation
     if (password.length < 6) {
       setError('Password must be at least 6 characters');
+      Swal.fire({
+        icon: 'error',
+        title: 'Weak Password',
+        text: 'Password must be at least 6 characters',
+      });
       return;
     }
-    
-    // Clear error if validation passes
-    setError('');
-    
-    // Proceed with registration...
+
+try {
+  const userCredential = await createUser(email, password);
+  await updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: photo || null
+  });
+
+  showSuccessAlert(email);
+} catch (error) {
+  setError(error.message);
+  Swal.fire({
+    icon: 'error',
+    title: 'Registration Failed',
+    text: error.message,
+  });
+}
   };
 
-  const handleSignInGoogle = () => {
-    // Add your Google sign-in logic here
-  signInWithPopup(auth,provider)
-    .then((userCredential) => {
-      const user = userCredential.user;
-
-      alert('You create account successfully')
-      swal("Wow!", "Congratulations! You got a registration bonus.", "success");
-      // console.log('Signed in user:', user);
-      navigate('/');
-    })
-    .catch((error) => {
-      const errorMessage = error.message;
-      const errorCode = error.code;
-      setError(`${errorMessage} (${errorCode})`);
-    });
-    setError('Google sign-in not implemented yet');
+  const handleGoogleSignUp = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Google Registration Successful!',
+        html: `Welcome <b>${user.displayName || user.email}</b>!`,
+        showConfirmButton: false,
+        timer: 2500,
+        willClose: () => {
+          navigate('/');
+        }
+      });
+    } catch (error) {
+      setError(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Google Sign Up Failed',
+        text: error.message,
+      });
+    }
   };
-
-
 
   return (
- <div className="flex  items-center justify-center min-h-screen bg-base-200 px-10">
-    <div className="card py-5 bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <h1 className=" ">Register Your Account</h1>
-        <form onSubmit={handleRegister} className="card-body">
-          <label className="label">Name</label>
-          <input 
-            type="text" 
-            name="name" 
-            className="input bg-fuchsia-100" 
-            placeholder="Enter Your Name" 
-            required 
-          />
+    <div className="flex items-center justify-center min-h-screen bg-base-200 px-4">
+      <div className="card py-5 bg-base-100 w-full max-w-md shadow-2xl">
+        <h1 className="text-2xl font-bold text-center mb-4">Register Your Account</h1>
+        
+        <form onSubmit={handleRegister} className="card-body space-y-4">
+          <div>
+            <label className="label">Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              className="input input-bordered w-full bg-fuchsia-50" 
+              placeholder="Enter Your Name" 
+              required 
+            />
+          </div>
 
-          <label className="label">Email</label>
-          <input 
-            type="email" 
-            name="email" 
-            className="input bg-fuchsia-100" 
-            placeholder="Email" 
-            required 
-          />
+          <div>
+            <label className="label">Email</label>
+            <input 
+              type="email" 
+              name="email" 
+              className="input input-bordered w-full bg-fuchsia-50" 
+              placeholder="Email" 
+              required 
+            />
+          </div>
 
-          <label className="label mt-1">Password</label>
-          <div className="relative w-full">
-            <div>
+          <div>
+            <label className="label">Password</label>
+            <div className="relative">
               <input
-                className='w-full py-2 px-2 rounded bg-fuchsia-100 border'
+                className='input input-bordered w-full bg-fuchsia-50'
                 name='password'
-                type={show ? 'text' : 'password'}
+                type={showPassword ? 'text' : 'password'}
                 required
                 placeholder="Password"
                 minLength="6"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must be more than 6 characters, including number, lowercase letter, uppercase letter"
               />
-              <p className="validator-hint hidden">
-                Must be more than 8 characters, including
-                <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
-              </p>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-3 right-3"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
-
-            <button
-              type="button"
-              onClick={() => setShow(!show)}
-              className="absolute top-3 right-3"
-            >
-              {show ? <FaEye /> : <FaEyeSlash />}
-            </button>
+            <p className="text-xs text-gray-500 mt-1">
+              Must be at least 6 characters
+            </p>
           </div>
 
           {error && (
-            <p className="text-red-500 text-sm mt-2">
-              {error}
-            </p>
+            <div className="alert alert-error shadow-lg">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{error}</span>
+              </div>
+            </div>
           )}
 
-          <label className="label">Photo URL (optional)</label>
-          <input 
-            type="text" 
-            name="photo" 
-            className="input bg-fuchsia-100" 
-            placeholder="Set Photo" 
-          />
+          <div>
+            <label className="label">Photo URL (optional)</label>
+            <input 
+              type="text" 
+              name="photo" 
+              className="input input-bordered w-full bg-fuchsia-50" 
+              placeholder="Photo URL" 
+            />
+          </div>
 
-          <button type="submit" className="btn  mt-4">
+          <button type="submit" className="btn btn-primary mt-4">
             Register Now
           </button>
 
+          <div className="divider">OR</div>
+
           <button 
-            onClick={handleSignInGoogle} 
-            className="btn bg-cyan-100 text-black border-[#e5e5e5]"
+            onClick={handleGoogleSignUp}
+            className="btn btn-outline w-full"
             type="button"
           >
-            <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <g>
-                <path d="m0 0H512V512H0" fill="#fff"></path>
-                <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
-                <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path>
-                <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path>
-                <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
-              </g>
+            <svg className="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+              <path fill="#EA4335" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
             </svg>
             Register with Google
           </button>
         </form>
 
-        <p className="text-center font-bold">
-          Already Have An Account?{' '}
-          <Link to="/signIn" className="text-red-500">LogIn</Link>
+        <p className="text-center font-medium mt-4">
+          Already have an account?{' '}
+          <Link to="/signIn" className="text-blue-600 hover:text-blue-800">
+            Login
+          </Link>
         </p>
       </div>
     </div>

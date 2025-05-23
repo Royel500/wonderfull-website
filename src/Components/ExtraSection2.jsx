@@ -31,7 +31,7 @@ const Example = () => {
     </div>
 
       <section className=" mx-auto p-6 bg-green-50 rounded-lg shadow-md my-10">
-      <h2 className="text-4xl font-bold text-green-800 mb-4 text-center">
+      <h2 className="text-4xl italic font-bold text-green-800 mb-4 text-center">
         Public Awareness about Tree Plantation
       </h2>
       <p className="text-lg text-red-500 mb-6  font-bold  text-center">

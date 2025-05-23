@@ -39,7 +39,7 @@ const PlantCard = ({ card, plant, setPlant }) => {
   return (
     <div className="card grid grid-cols-1 justify-end lg:grid-cols-3 bg-base-100 border-2 shadow-sm">
       <figure>
-        <img src={image} alt={name} className="h-50 w-60 rounded-2xl p-2" />
+        <img src={image} alt={name} className="h-50  w-60 rounded-2xl p-2" />
       </figure>
 
       <div className="card-body">
@@ -51,18 +51,21 @@ const PlantCard = ({ card, plant, setPlant }) => {
 
       <div className="join join-vertical space-y-2 justify-center p-4">
         <Link to={`/details/${_id}`}>
-         <button className="btn join-item w-full bg-gradient-to-r from-blue-500 to-green-500 text-white border-none">
+         <button className="btn join-item w-full bg-gradient-to-r
+          from-green-300 via-purple-500 to-pink-500 text-white border-none">
   See more..
 </button>
 
         </Link>
         <Link to={`/update/${_id}`}>
-        <button className="btn join-item w-full bg-gradient-to-r from-blue-500 to-green-500 text-white border-none">
+        <button className="btn join-item  w-full bg-gradient-to-r
+         from-red-500  to-green-500 text-white border-none">
   Edit
 </button>
 
         </Link>
-        <button onClick={() => handleDelete(_id)} className="btn join-item w-full bg-gradient-to-r from-blue-500 to-green-500 text-white border-none">
+        <button onClick={() => handleDelete(_id)} className="btn join-item w-full bg-gradient-to-r
+         from-green-500 via-purple-500 to-red-500 text-white border-none">
           X
         </button>
       </div>

@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthProvider';
 import './Navber.css';
 import { GiFruitTree } from "react-icons/gi";
 import { FiMenu, FiX } from "react-icons/fi";
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -40,7 +41,17 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut()
-      .then(() => alert('You are logged out'))
+      .then(() => {
+           Swal.fire({
+      title: 'Are you sure you want to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Yes, logout',
+      cancelButtonText: 'Cancel'
+    })
+      })
       .catch((error) => alert(`Error: ${error.message}`));
   };
 

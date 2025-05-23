@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
+import { useLoaderData,  } from 'react-router';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
 
 const MyTips = () => {
   const alltips = useLoaderData(); // Load all tips from loader
-  const navigate = useNavigate();
+
   const [tips, setTips] = useState(alltips); // Show all tips
 
   const handleDelete = (_id) => {
@@ -36,7 +36,7 @@ const MyTips = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold text-center mb-4">All Garden Tips</h2>
+      <h2 className="text-3xl font-bold italic text-blue-800 text-center mb-4">My All Garden Tips</h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border">
           <thead className="bg-green-100 text-left">

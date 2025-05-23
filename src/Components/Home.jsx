@@ -65,7 +65,7 @@ const Home = () => {
       <section>
 
 
-        <h1 className='text-center font-bold text-3xl italic mt-20'>Latest Plant Tips:</h1>
+        <h1 className='text-center text-fuchsia-700 font-bold text-3xl italic mt-20'>Latest Plant Tips:</h1>
         <div className=" grid grid-cols-1 gap-5 my-15 mx-5">
           {tips.map(tip => (
             <TipsCard key={tip._id}

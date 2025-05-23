@@ -22,6 +22,7 @@ import BannerSlider from './Components/BannerSlider.jsx';
 import Gardeners from './Components/Gardeners.jsx';
 import BrowserTips from './Components/BrowserTips.jsx';
 import MyTips from './Components/Mytips.jsx';
+import PrivateRoute from './Components/PrivateRoute.jsx';
 // import { TipsProvider } from './Components/Context/TipsContext.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
@@ -43,12 +44,14 @@ const router = createBrowserRouter([
 {
   path: '/update/:id',
    loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
-  element: <Update />
+  element: <PrivateRoute> <Update /> </PrivateRoute>
 },
 {
   path: '/details/:id',
   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
-  element: <Details />
+  element: <PrivateRoute>
+     <Details />
+  </PrivateRoute>
 },
       {
 
