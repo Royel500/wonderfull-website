@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const PlantCard = ({ card, plant, setPlant }) => {
 
-  const { _id, name, category, plantType, image ,availability } = card;
+  const { _id, name,difficulty, category, plantType, image ,availability } = card;
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -45,7 +45,7 @@ const PlantCard = ({ card, plant, setPlant }) => {
       <div className="card-body">
         <h2 className="card-title">Title: {name}</h2>
         <p><strong> PlantType:</strong> {plantType}</p>
-        <p> <strong>Category: </strong>  {category}</p>
+        <p> <strong>Difficulty: </strong>  {difficulty}</p>
         <p> <strong> Availability: </strong> {availability}</p>
       </div>
 
