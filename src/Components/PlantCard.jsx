@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const PlantCard = ({ card, plant, setPlant }) => {
 
-  const { _id, name,difficulty, category, plantType, image ,availability } = card;
+  const { _id, name,difficulty, plantType, image ,availability } = card;
 
   const handleDelete = (_id) => {
     Swal.fire({

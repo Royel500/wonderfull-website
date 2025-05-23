@@ -1,11 +1,17 @@
 import { useLoaderData } from 'react-router';
 import BannerSlider from './BannerSlider';
-import { TipsProvider } from './Context/TipsContext';
+// import { TipsProvider } from './Context/TipsContext';
 import User from './User';
 
 import { useEffect, useState } from 'react';
 
 import TipsCard from './TipsCard';
+import ExtraSection from './ExtraSection';
+import { Typewriter } from 'react-simple-typewriter';
+import ExtraSection2 from './ExtraSection2';
+import Example from './ExtraSection2';
+
+
 
 const Home = () => {
   const data = useLoaderData(); // This is used for featured gardeners
@@ -20,13 +26,34 @@ const Home = () => {
   }, []);
 
   return (
-    <TipsProvider>
+ <>
       {/* Banner section */}
       <BannerSlider />
+         
 
       {/* ---- Featured Gardeners ----- */}
       <section>
-        <h1 className='text-center font-bold text-3xl italic mt-20'>Featured Gardeners:</h1>
+
+
+
+
+       
+        <h3   className='text-center text-blue-700 font-bold text-3xl italic mt-20'>
+  <Typewriter
+
+    cursor
+    cursorBlinking
+    delaySpeed={1000}
+    deleteSpeed={2}
+    loop={0}
+    typeSpeed={200}
+    words={[
+      
+      'Featured Gardeners :'
+     
+    ]}
+  />
+</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-15 mx-5">
           {data.map(userr => (
             <User key={userr._id} userr={userr} />
@@ -36,6 +63,8 @@ const Home = () => {
 
       {/* ----- Latest Plant Tips ----- */}
       <section>
+
+
         <h1 className='text-center font-bold text-3xl italic mt-20'>Latest Plant Tips:</h1>
         <div className=" grid grid-cols-1 gap-5 my-15 mx-5">
           {tips.map(tip => (
@@ -46,7 +75,14 @@ const Home = () => {
           ))}
         </div>
       </section>
-    </TipsProvider>
+        <Example></Example>
+      <section>
+
+        <ExtraSection></ExtraSection>
+
+      </section>
+
+   </>
   );
 };
 

@@ -1,18 +1,18 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
-import { useTips } from './Context/TipsContext';
+
 
 const Details = () => {
   const data = useLoaderData();
-  const { likeTip } = useTips();
+
 
   return (
     <>
-      <div className="lg:w-3xl mx-auto mt-10 p-5 space-y-5 bg-pink-50 rounded shadow">
+      <div className="lg:w-3xl mx-auto my-10 p-5 space-y-5 bg-pink-50 rounded shadow">
         <img
           src={data.image}
           alt={data.title}
-          className="w-full h-64 object-cover rounded mb-4"
+          className="max-w-screen mx-auto  h-64 object-cover rounded mb-4"
         />
         <h2 className="text-2xl text-center italic font-bold mb-2">{data.category}</h2>
         <div className="flex gap-5">
@@ -42,7 +42,7 @@ const Details = () => {
 
         {/* Like Button */}
         <button
-          onClick={() => likeTip(data._id)}
+       
           className="mt-4 btn bg-gradient-to-r from-blue-500 to-green-500 text-white"
         >
           👍 Like

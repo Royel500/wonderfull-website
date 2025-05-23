@@ -17,6 +17,7 @@ const BrowserTips = () => {
       
       {/* Filter Dropdown */}
       <div className="flex justify-end mb-4">
+        <h1 className='font-bold mt-1.5 mr-2'>Short By </h1>
         <select
           onChange={(e) => setDifficulty(e.target.value)}
           className="select select-bordered max-w-xs"
