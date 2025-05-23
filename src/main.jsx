@@ -21,6 +21,7 @@ import BannerSlider from './Components/BannerSlider.jsx';
 // import Explore from './Components/Explore.jsx';
 import Gardeners from './Components/Gardeners.jsx';
 import BrowserTips from './Components/BrowserTips.jsx';
+import MyTips from './Components/Mytips.jsx';
 // import { TipsProvider } from './Components/Context/TipsContext.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
             loader: () => fetch('http://localhost:4000/plants'),
       element:<BrowserTips></BrowserTips>
 
+    },
+    {
+      path:'/my-tips',
+     loader: () => fetch('http://localhost:4000/plants'),
+     element: <MyTips></MyTips>
     },
   {
     path:'/explore' ,

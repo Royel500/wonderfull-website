@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import groovyWalkAnimation from "./Animation.json";
+import groovyWalkAnimation from "./Animation - 1748008936794.json";
 import { Typewriter } from 'react-simple-typewriter';
 const Example = () => {
   return (
