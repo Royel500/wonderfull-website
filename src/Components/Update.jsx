@@ -190,8 +190,8 @@ if(data.modifiedCount){
 
         {/* Submit Button */}
         <div className="form-control mt-8">
-          <button type="submit" className="btn rounded-lg bg-emerald-500 border-2 w-full">
-            Share Tip
+          <button type="submit" className="btn rounded-lg  bg-gradient-to-r from-red-500 via-green-500 to-blue-500  border-2 w-full">
+            Update Tip
           </button>
         </div>
       </form>

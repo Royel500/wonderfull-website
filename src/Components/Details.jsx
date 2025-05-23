@@ -8,13 +8,13 @@ const Details = () => {
 
   return (
     <>
-      <div className="lg:w-3xl mx-auto mt-10 p-5 space-y-5 bg-green-200 rounded shadow">
+      <div className="lg:w-3xl mx-auto mt-10 p-5 space-y-5 bg-pink-50 rounded shadow">
         <img
           src={data.image}
           alt={data.title}
           className="w-full h-64 object-cover rounded mb-4"
         />
-        <h2 className="text-2xl text-center font-bold mb-2">{data.category}</h2>
+        <h2 className="text-2xl text-center italic font-bold mb-2">{data.category}</h2>
         <div className="flex gap-5">
           <div>
             <p className="mb-2">

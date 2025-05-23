@@ -1,34 +1,51 @@
 import { useLoaderData } from 'react-router';
 import BannerSlider from './BannerSlider';
-
 import { TipsProvider } from './Context/TipsContext';
 import User from './User';
 
-const Home = () => {
-  const data = useLoaderData();
+import { useEffect, useState } from 'react';
 
+import TipsCard from './TipsCard';
+
+const Home = () => {
+  const data = useLoaderData(); // This is used for featured gardeners
+  const [tips, setTips] = useState([]); // State for tips
+ const [plant , setPlant]=useState();
+  useEffect(() => {
+    fetch('http://localhost:4000/plants')
+      .then(res => res.json())
+      .then(data => {
+        setTips(data);
+      });
+  }, []);
 
   return (
     <TipsProvider>
       {/* Banner section */}
       <BannerSlider />
-      {/* ----Gardeners----- */}
-       <section>
-            <h1 className='text-center font-bold text-3xl italic mt-20'>Featured Gardeners:</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-15 mx-5">
-    {
-      data.map(userr=>(
-        <User key={userr._id} 
-        userr={userr}
-        ></User>
-      ))
-    }
-    </div>
-    </section>
-    {/* ----- Tips shears----- */}
-    <section>
 
-    </section>
+      {/* ---- Featured Gardeners ----- */}
+      <section>
+        <h1 className='text-center font-bold text-3xl italic mt-20'>Featured Gardeners:</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-15 mx-5">
+          {data.map(userr => (
+            <User key={userr._id} userr={userr} />
+          ))}
+        </div>
+      </section>
+
+      {/* ----- Latest Plant Tips ----- */}
+      <section>
+        <h1 className='text-center font-bold text-3xl italic mt-20'>Latest Plant Tips:</h1>
+        <div className=" grid grid-cols-1 gap-5 my-15 mx-5">
+          {tips.map(tip => (
+            <TipsCard key={tip._id}
+            plant={plant}
+            setPlant={setPlant}
+            tip={tip} />
+          ))}
+        </div>
+      </section>
     </TipsProvider>
   );
 };
