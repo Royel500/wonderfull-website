@@ -10,7 +10,9 @@ const Home = () => {
 
   return (
     <TipsProvider>
+      {/* Banner section */}
       <BannerSlider />
+      {/* ----Gardeners----- */}
        <section>
             <h1 className='text-center font-bold text-3xl italic mt-20'>Featured Gardeners:</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-15 mx-5">
@@ -22,8 +24,10 @@ const Home = () => {
       ))
     }
     </div>
-   
-  
+    </section>
+    {/* ----- Tips shears----- */}
+    <section>
+
     </section>
     </TipsProvider>
   );
