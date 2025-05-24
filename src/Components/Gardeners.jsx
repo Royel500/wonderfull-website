@@ -7,11 +7,12 @@ const Gardeners = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+      <h1 className='text-4xl italic text-blue-700 font-bold'> All Gardeners here </h1>
       {gardeners.map((gardener) => (
         <div key={gardener._id || gardener.id} className="card bg-base-100  shadow-sm">
           <figure>
             <img
-              src={gardener.image || "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}
+              src={gardener.image || "https://i.ibb.co.com/0Rngnj4b/Shaif-01.jpg"}
               alt={gardener.name}
               className="w-full h-48 object-cover rounded"
             />

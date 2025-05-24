@@ -12,19 +12,19 @@ const BannerSlider = () => {
       id: 1,
       title: "Spring Garden Fest 2025",
       description: "Join our biggest gardening event of the year!",
-      image: "/src/assets/Slider1.jpg"
+      image: "/assets/Slider1.jpg"
     },
     {
       id: 2,
       title: "Urban Gardening Tips",
       description: "Discover how to grow fresh veggies in your balcony.",
-      image: "/src/assets/Slider2.jpg"
+      image: "/assets/Slider2.jpg"
     },
     {
       id: 3,
       title: "Kids Gardening Workshop",
       description: "Fun and learning combined for young gardeners.",
-      image:"/src/assets/images.jpeg"
+      image:"/assets/images.jpeg"
     }
   ];
 
