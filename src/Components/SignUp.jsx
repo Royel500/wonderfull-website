@@ -93,7 +93,7 @@ try {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-base-200 px-4">
+    <div className="flex my-10 items-center justify-center min-h-screen bg-base-200 px-4">
       <div className="card py-5 bg-base-100 w-full max-w-md shadow-2xl">
         <h1 className="text-2xl font-bold text-center mb-4">Register Your Account</h1>
         

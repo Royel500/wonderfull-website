@@ -11,7 +11,23 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); 
   const [user, setUser] = useState(null);
+  const [theme, setTheme] = useState('light');
 
+    useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
+
+
+  
 const createUser = ( email,password) =>{
   setLoading(true);
     return createUserWithEmailAndPassword(auth,email,password)
@@ -54,7 +70,9 @@ const createUser = ( email,password) =>{
    createUser,
    signIn,
    logOut,
+   theme,
    loading,
+   toggleTheme,
    setLoading,
    user,
     }
