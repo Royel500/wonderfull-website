@@ -15,7 +15,7 @@ const AddPlant = () => {
     tipData.userName = user.displayName;
     tipData.userEmail = user.email;
 
-    fetch('http://localhost:4000/plants', {
+    fetch('https://a10server.vercel.app/plants', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ const Home = () => {
   const [tips, setTips] = useState([]); // State for tips
  const [plant , setPlant]=useState();
   useEffect(() => {
-    fetch('http://localhost:4000/plants')
+    fetch('https://a10server.vercel.app/plants')
       .then(res => res.json())
       .then(data => {
         setTips(data);

@@ -17,7 +17,7 @@ const Update = () => {
        tipData.userName = user.displayName;
     tipData.userEmail = user.email;
 
-    fetch(`http://localhost:4000/plants/${_id}` , {
+    fetch(`https://a10server.vercel.app/plants/${_id}` , {
       method:'PUT' ,
       headers:{
         'content-type':'application/json'
