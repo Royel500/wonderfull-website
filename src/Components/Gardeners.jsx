@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router';
 
 const Gardeners = () => {
   const gardeners = useLoaderData();
-  console.log(gardeners);
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">

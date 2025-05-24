@@ -33,7 +33,7 @@ const TipsCard = ({tip,plant,setPlant}) => {
       }
     });
   };
-
+  if (availability !== "Public") return null;
   return (
     <div className="card grid grid-cols-1  justify-end lg:grid-cols-3 bg-base-100 border-2 shadow-sm">
       <figure>

@@ -23,6 +23,7 @@ import Gardeners from './Components/Gardeners.jsx';
 import BrowserTips from './Components/BrowserTips.jsx';
 import MyTips from './Components/Mytips.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
+import Loading from './Components/Loading.jsx';
 // import { TipsProvider } from './Components/Context/TipsContext.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       {
         index:true ,
         loader: () => fetch('http://localhost:4000/users'),
+         hydrateFallbackElement:<Loading></Loading>,
         element:<Home></Home>
       },
       {
@@ -44,11 +46,13 @@ const router = createBrowserRouter([
 {
   path: '/update/:id',
    loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+   hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute> <Update /> </PrivateRoute>
 },
 {
   path: '/details/:id',
   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+   hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute>
      <Details />
   </PrivateRoute>
@@ -69,17 +73,20 @@ const router = createBrowserRouter([
     {
       path:'/tips' ,
             loader: () => fetch('http://localhost:4000/plants'),
+             hydrateFallbackElement:<Loading></Loading>,
       element:<BrowserTips></BrowserTips>
 
     },
     {
       path:'/my-tips',
      loader: () => fetch('http://localhost:4000/plants'),
+      hydrateFallbackElement:<Loading></Loading>,
      element: <MyTips></MyTips>
     },
   {
     path:'/explore' ,
           loader: () => fetch('http://localhost:4000/users'),
+           hydrateFallbackElement:<Loading></Loading>,
     element:<Gardeners></Gardeners>
   }
    

@@ -27,7 +27,7 @@ const AddPlant = () => {
         return res.json();
       })
       .then(data => {
-        console.log('Server Response:', data);
+       
         if (data.insertedId || data._id || data.id) {
           Swal.fire({
             title: 'Success!',
