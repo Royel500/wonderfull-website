@@ -6,6 +6,7 @@ import { IoMdMoon } from "react-icons/io";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { FiMenu, FiX } from "react-icons/fi";
 import Swal from 'sweetalert2';
+import './Navber.css'
 
 const Navbar = () => {
   const { user, logOut, theme, toggleTheme } = useContext(AuthContext);

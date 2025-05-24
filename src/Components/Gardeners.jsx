@@ -6,8 +6,11 @@ const Gardeners = () => {
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+    <>
       <h1 className='text-4xl italic text-blue-700 font-bold'> All Gardeners here </h1>
+ 
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+    
       {gardeners.map((gardener) => (
         <div key={gardener._id || gardener.id} className="card bg-base-100  shadow-sm">
           <figure>
@@ -32,6 +35,7 @@ const Gardeners = () => {
         </div>
       ))}
     </div>
+       </>
   );
 };
 
