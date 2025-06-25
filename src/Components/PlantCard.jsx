@@ -17,7 +17,7 @@ const PlantCard = ({ card, plant, setPlant }) => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://a10server.vercel.app/plants/${_id}`, {
+        fetch(`http://localhost:4000/plants/${_id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'

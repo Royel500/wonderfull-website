@@ -1,4 +1,5 @@
 import React from 'react';
+import { GiFruitTree } from "react-icons/gi";
 
 const Footer = () => {
     return (
@@ -7,6 +8,11 @@ const Footer = () => {
       sm:footer-horizontal text-base-content p-10 font-bold">
 
   <nav>
+        {/* Logo */}
+            <div className="flex items-center gap-2 text-xl font-bold">
+              <GiFruitTree size={30} className="text-green-500 bg-white rounded-full p-1" />
+              <span>GardenTips</span>
+            </div>
     <h6 className="footer-title">Services</h6>
     <a className="link link-hover">Branding</a>
     <a className="link link-hover">Design</a>

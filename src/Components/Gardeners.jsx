@@ -7,7 +7,7 @@ const Gardeners = () => {
 
   return (
     <>
-      <h1 className='text-4xl italic text-blue-700 font-bold'> All Gardeners here </h1>
+      <h1 className='text-4xl italic text-center my-10 text-blue-700 font-bold'> All Gardeners here </h1>
  
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
     

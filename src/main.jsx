@@ -28,6 +28,7 @@ import Loading from './Components/Loading.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     children:[
       {
         index:true ,
-        loader: () => fetch('https://a10server.vercel.app/users'),
+        loader: () => fetch('http://localhost:4000/users'),
          hydrateFallbackElement:<Loading></Loading>,
         element:<Home></Home>
       },
@@ -45,13 +46,13 @@ const router = createBrowserRouter([
       },
 {
   path: '/update/:id',
-   loader: ({ params }) => fetch(`https://a10server.vercel.app/plants/${params.id}`),
+   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
    hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute> <Update /> </PrivateRoute>
 },
 {
   path: '/details/:id',
-  loader: ({ params }) => fetch(`https://a10server.vercel.app/plants/${params.id}`),
+  loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
    hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute>
      <Details />
@@ -72,20 +73,20 @@ const router = createBrowserRouter([
       },
     {
       path:'/tips' ,
-            loader: () => fetch('https://a10server.vercel.app/plants'),
+            loader: () => fetch('http://localhost:4000/plants'),
              hydrateFallbackElement:<Loading></Loading>,
       element:<BrowserTips></BrowserTips>
 
     },
     {
       path:'/my-tips',
-     loader: () => fetch('https://a10server.vercel.app/plants'),
+     loader: () => fetch('http://localhost:4000/plants'),
       hydrateFallbackElement:<Loading></Loading>,
      element: <MyTips></MyTips>
     },
   {
     path:'/explore' ,
-          loader: () => fetch('https://a10server.vercel.app/users'),
+          loader: () => fetch('http://localhost:4000/users'),
            hydrateFallbackElement:<Loading></Loading>,
     element:<Gardeners></Gardeners>
   }
@@ -103,11 +104,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<AuthProvider>
-
-     <RouterProvider router={router}>
-   </RouterProvider>
-
-</AuthProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
