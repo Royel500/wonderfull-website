@@ -24,6 +24,8 @@ import BrowserTips from './Components/BrowserTips.jsx';
 import MyTips from './Components/Mytips.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
 import Loading from './Components/Loading.jsx';
+import DashboardLayout from './DashboardLayout/DashboardLayout.jsx';
+import DashboardHome from './DashboardLayout/DashboardHome.jsx';
 // import { TipsProvider } from './Components/Context/TipsContext.jsx';
 
 // import Gardeners from './Components/Gardeners.jsx';
@@ -36,28 +38,48 @@ const router = createBrowserRouter([
     children:[
       {
         index:true ,
-        loader: () => fetch('http://localhost:4000/users'),
+        loader: () => fetch('https://a10server.vercel.app/users'),
          hydrateFallbackElement:<Loading></Loading>,
         element:<Home></Home>
       },
-      {
-    path:'/plants',
-    element:<AddPlant></AddPlant>
-      },
+   
 {
   path: '/update/:id',
-   loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+   loader: ({ params }) => fetch(`https://a10server.vercel.app/plants/${params.id}`),
    hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute> <Update /> </PrivateRoute>
 },
 {
   path: '/details/:id',
-  loader: ({ params }) => fetch(`http://localhost:4000/plants/${params.id}`),
+  loader: ({ params }) => fetch(`https://a10server.vercel.app/plants/${params.id}`),
    hydrateFallbackElement:<Loading></Loading>,
   element: <PrivateRoute>
      <Details />
   </PrivateRoute>
 },
+ {
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    children: [
+      { index: true, element: <DashboardHome /> },
+       {
+    path:'explore' ,
+          loader: () => fetch('https://a10server.vercel.app/users'),
+           hydrateFallbackElement:<Loading></Loading>,
+    element:<Gardeners></Gardeners>
+  },
+       {
+    path:'plants',
+    element:<AddPlant></AddPlant>
+      },
+        {
+      path:'my-tips',
+     loader: () => fetch('https://a10server.vercel.app/plants'),
+      hydrateFallbackElement:<Loading></Loading>,
+     element: <MyTips></MyTips>
+    },
+    ]
+  },
       {
 
         path:'/signIn' ,
@@ -73,23 +95,13 @@ const router = createBrowserRouter([
       },
     {
       path:'/tips' ,
-            loader: () => fetch('http://localhost:4000/plants'),
+            loader: () => fetch('https://a10server.vercel.app/plants'),
              hydrateFallbackElement:<Loading></Loading>,
       element:<BrowserTips></BrowserTips>
 
     },
-    {
-      path:'/my-tips',
-     loader: () => fetch('http://localhost:4000/plants'),
-      hydrateFallbackElement:<Loading></Loading>,
-     element: <MyTips></MyTips>
-    },
-  {
-    path:'/explore' ,
-          loader: () => fetch('http://localhost:4000/users'),
-           hydrateFallbackElement:<Loading></Loading>,
-    element:<Gardeners></Gardeners>
-  }
+  
+
    
     ]
 

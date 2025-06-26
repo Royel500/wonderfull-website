@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { useLoaderData,  } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom'; // ✅ fixed import path
 import Swal from 'sweetalert2';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom'; // ✅ fixed import path
+import useAuth from './hook/useAuth';
 
 const MyTips = () => {
-  const alltips = useLoaderData(); // Load all tips from loader
+  const { user } = useAuth();
+  const allTips = useLoaderData(); // All tips from server
+  const [tips, setTips] = useState([]);
 
-  const [tips, setTips] = useState(alltips); // Show all tips
+  // ✅ Filter tips for logged-in user
+  useEffect(() => {
+    if (user?.email) {
+      const userTips = allTips.filter(tip => tip.userEmail === user.email);
+      setTips(userTips);
+    }
+  }, [allTips, user]);
 
+  // ✅ Handle delete
   const handleDelete = (_id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -19,11 +29,11 @@ const MyTips = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:4000/plants/${_id}`, {
+        fetch(`https://a10server.vercel.app/plants/${_id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())
-          .then(data => {
+          .then(data => {            
             if (data.deletedCount > 0) {
               Swal.fire('Deleted!', 'The tip has been deleted.', 'success');
               const remaining = tips.filter(tip => tip._id !== _id);
@@ -36,7 +46,10 @@ const MyTips = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold italic text-blue-800 text-center mb-4">My All Garden Tips</h2>
+      <h2 className="text-3xl font-bold italic text-blue-800 text-center mb-4">
+        My All Garden Tips
+      </h2>
+
       <div className="overflow-x-auto">
         <table className="table-auto w-full border">
           <thead className="bg-green-100 text-left">
@@ -50,12 +63,20 @@ const MyTips = () => {
           <tbody>
             {tips.map(tip => (
               <tr key={tip._id} className="border-t">
-                <td className="p-2"><img src={tip.image} alt="Tip" className="w-16 h-16 object-cover rounded" /></td>
+                <td className="p-2">
+                  <img
+                    src={tip.image}
+                    alt="Tip"
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                </td>
                 <td className="p-2">{tip.name}</td>
                 <td className="p-2">{tip.availability || 'N/A'}</td>
                 <td className="p-2 flex gap-3">
-                 <Link to={`/update/${tip._id}`}>
-                    <button className="bg-yellow-500 text-white px-3 py-1 rounded">Update</button>
+                  <Link to={`/update/${tip._id}`}>
+                    <button className="bg-yellow-500 text-white px-3 py-1 rounded">
+                      Update
+                    </button>
                   </Link>
                   <button
                     onClick={() => handleDelete(tip._id)}
@@ -66,10 +87,11 @@ const MyTips = () => {
                 </td>
               </tr>
             ))}
+
             {tips.length === 0 && (
               <tr>
                 <td colSpan="4" className="text-center p-4 text-gray-500">
-                  No tips found.
+                  No tips found.Please give some tips to show data.
                 </td>
               </tr>
             )}

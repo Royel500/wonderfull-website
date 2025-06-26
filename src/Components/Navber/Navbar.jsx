@@ -7,6 +7,7 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { FiMenu, FiX } from "react-icons/fi";
 import Swal from 'sweetalert2';
 import './Navber.css'
+import ThemeToggle from '../ThemeToggle';
 
 const Navbar = () => {
   const { user, logOut, theme, toggleTheme } = useContext(AuthContext);
@@ -66,12 +67,7 @@ const Navbar = () => {
           >
             Home
           </NavLink>
-          <NavLink 
-            to="/explore" 
-        
-          >
-            Explore Gardeners
-          </NavLink>
+         
           <NavLink 
             to="/tips" 
        
@@ -80,21 +76,16 @@ const Navbar = () => {
           </NavLink>
           {user && (
             <>
+              
+            
+
               <NavLink 
-                to="/plants" 
+                to="/dashboard"
                 className={({ isActive }) => 
                   isActive ? 'text-white font-bold' : 'hover:text-white'
                 }
               >
-                Share Tip
-              </NavLink>
-              <NavLink 
-                to="/my-tips" 
-                className={({ isActive }) => 
-                  isActive ? 'text-white font-bold' : 'hover:text-white'
-                }
-              >
-                My Tips
+                Dashboard
               </NavLink>
             </>
           )}
@@ -103,7 +94,7 @@ const Navbar = () => {
         {/* Right Side Controls */}
         <div className="flex items-center gap-4">
           {/* Theme Toggle */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className={`px-3 py-1 rounded-full ${
               theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'
@@ -111,7 +102,8 @@ const Navbar = () => {
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
             {theme === 'light' ? <IoMdMoon /> :<MdOutlineWbSunny />}
-          </button>
+          </button> */}
+            <ThemeToggle />
 
           {/* User Controls */}
           {user ? (
