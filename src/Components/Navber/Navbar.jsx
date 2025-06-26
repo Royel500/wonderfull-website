@@ -6,6 +6,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Swal from 'sweetalert2';
 import './Navber.css';
 import ThemeToggle from '../ThemeToggle';
+import Gardeners from './../Gardeners';
 
 const Navbar = () => {
   const { user, logOut, theme } = useContext(AuthContext);
@@ -72,9 +73,9 @@ const Navbar = () => {
               isActive ? 'text-white font-bold' : 'hover:text-white'
             }
           >
-            Browse Tips
+            All Gardeners
           </NavLink>
-          {user && (
+          {/* {user && ( */}
             <NavLink 
               to="/dashboard"
               className={({ isActive }) =>
@@ -83,7 +84,7 @@ const Navbar = () => {
             >
               Dashboard
             </NavLink>
-          )}
+          {/* )} */}
         </div>
 
         {/* Right Side Controls */}
@@ -154,9 +155,9 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(false)}
               className={({ isActive }) => isActive ? 'font-bold text-green-500' : ''}
             >
-              Browse Tips
+              All Gardeners
             </NavLink>
-            {user && (
+            {/* {user && ( */}
               <NavLink 
                 to="/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
@@ -164,7 +165,7 @@ const Navbar = () => {
               >
                 Dashboard
               </NavLink>
-            )}
+            {/* )} */}
           </div>
 
           {/* Mobile Auth Buttons */}
