@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`relative px-4 py-3 shadow-lg ${
+    <nav className={`relative px-2 mx-2 py-3 shadow-lg ${
       theme === 'dark' 
         ? 'bg-gray-900 text-white' 
         : 'bg-gradient-to-r from-blue-400 via-green-500 to-red-300 text-gray-800'

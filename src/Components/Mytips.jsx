@@ -9,6 +9,8 @@ const MyTips = () => {
   const allTips = useLoaderData(); // All tips from server
   const [tips, setTips] = useState([]);
 
+
+
   // ✅ Filter tips for logged-in user
   useEffect(() => {
     if (user?.email) {
@@ -44,7 +46,9 @@ const MyTips = () => {
     });
   };
 
+
   return (
+    
     <div className="p-6">
       <h2 className="text-3xl font-bold italic text-blue-800 text-center mb-4">
         My All Garden Tips
