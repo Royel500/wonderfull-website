@@ -4,9 +4,9 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-     <aside className="w-64 bg-base-200 p-4">
+<aside className="h-screen sticky top-15 flex-[3] bg-base-200 p-4 -y-auto">
   <h2 className="text-xl font-bold mb-4">Dashboard</h2>
-  <ul className="flex flex-col space-y-2"> {/* Changed to flex-col for vertical layout */}
+  <ul className="flex flex-col space-y-5"> {/* Changed to flex-col for vertical layout */}
     <li>
       <NavLink 
         to="/dashboard"
@@ -52,7 +52,7 @@ const DashboardLayout = () => {
 </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 bg-base-100">
+      <main className="flex-[12] p-6 bg-base-100">
         <Outlet />
       </main>
     </div>
