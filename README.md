@@ -2,7 +2,7 @@
 # Project name : Gardening App
 
 ##  Live Site  
-[View the Live Site] https://assignment-rs-10.web.app
+Live =  assignment-rs-10.web.app
 
 ##  Features
 
